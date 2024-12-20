@@ -1,0 +1,27 @@
+export default {
+  'login.form.title': 'Welcome Back',
+  'login.form.username.errMsg': 'Username or email cannot be empty',
+  'login.form.password.errMsg': 'Password cannot be empty',
+  'login.form.login.errMsg': 'Login error, please refresh and try again',
+  'login.form.login.success': 'Login successful',
+  'login.form.username.placeholder': 'Please enter your username or email',
+  'login.form.password.placeholder': 'Please enter your password',
+  'login.form.rememberPassword': 'Remember Password',
+  'login.form.forgetPassword': 'Forgot Password',
+  'login.form.login': 'Login',
+  'login.form.loginWith': 'Login with other methods',
+  'login.form.loginWithGoogle': 'Login with Google',
+  'login.form.loginWithFacebook': 'Login with Facebook',
+  'login.form.loginWithTwitter': 'Login with Twitter',
+  'login.form.loginWithGithub': 'Login with Github',
+  'login.form.loginWithWechat': 'Login with WeChat',
+  'login.form.register': 'Register Account',
+  'login.banner.slogan1': 'High-quality templates ready to use',
+  'login.banner.subSlogan1':
+    'Rich page templates covering most typical business scenarios',
+  'login.banner.slogan2': 'Built-in solutions for common problems',
+  'login.banner.subSlogan2':
+    'Internationalization, routing configuration, state management, all included',
+  'login.banner.slogan3': 'Integration with the visual enhancement tool AUX',
+  'login.banner.subSlogan3': 'Achieve flexible block-based development',
+};
