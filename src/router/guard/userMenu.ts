@@ -16,11 +16,11 @@ export default function setupUserMenuGuard(router: Router) {
 
     const userStore = useUserStore();
     const appStore = useAppStore();
-    if (!userStore.userInfo.username) {
+    if (!userStore.username) {
       dynamicRoutesAdded = false;
     }
     // 如果用户已登录且动态路由未加载
-    if (userStore.userInfo.username && !dynamicRoutesAdded) {
+    if (userStore.username && !dynamicRoutesAdded) {
       if (!appStore.appAsyncMenus.length) {
         // 获取服务端菜单配置
         await appStore.fetchServerMenuConfig();

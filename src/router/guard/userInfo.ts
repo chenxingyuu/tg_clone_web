@@ -11,10 +11,7 @@ export default function setupUserInfoGuard(router: Router) {
     const redirectToLogin = () => {
       next({
         name: 'login',
-        query: {
-          redirect: to.path,
-          ...to.query,
-        } as LocationQueryRaw,
+        query: to.path ? { redirect: to.path, ...to.query } : undefined,
       });
     };
 

@@ -73,7 +73,7 @@
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
   import { LoginData } from '@/api/system/types';
-  import { DEFAULT_ROUTE_NAME } from '@/router/constants';
+  import { DEFAULT_ROUTE } from '@/router/constants';
 
   const router = useRouter();
   const { t } = useI18n();
@@ -104,16 +104,12 @@
       try {
         await userStore.login(values as LoginData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
-        if (redirect) {
-          await router.replace({
-            path: redirect as string,
-            query: { ...othersQuery },
-          });
-        } else {
-          await router.replace({ name: DEFAULT_ROUTE_NAME });
-        }
-
+        const targetPath = redirect
+          ? (redirect as string)
+          : DEFAULT_ROUTE.fullPath;
+        await router.replace({ path: targetPath, query: { ...othersQuery } });
         Message.success(t('login.form.login.success'));
+
         const { rememberPassword } = loginConfig.value;
         const { username, password } = values;
         // 实际生产环境需要进行加密存储。
