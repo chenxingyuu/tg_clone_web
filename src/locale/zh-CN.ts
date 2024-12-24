@@ -21,6 +21,7 @@ import localeSystemPermission from '@/views/system/permission/locale/zh-CN';
 import localeSystemMenu from '@/views/system/menu/locale/zh-CN';
 import localeSystemRole from '@/views/system/role/locale/zh-CN';
 import localeSystemUser from '@/views/system/user/locale/zh-CN';
+import localeTG from '@/views/tg/locale/zh-CN';
 import localeSettings from './zh-CN/settings';
 
 export default {
@@ -31,20 +32,9 @@ export default {
   'menu.system.role': '角色管理',
   'menu.system.permission': '权限管理',
   'menu.system.menu': '菜单管理',
-  'menu.server.dashboard': '仪表盘-服务端',
-  'menu.server.workplace': '工作台-服务端',
-  'menu.server.monitor': '实时监控-服务端',
-  'menu.aris': '实时分析',
-  'menu.aris.voice': '管制语音',
-  'menu.aris.camera': '摄像头',
-  'menu.aris.device': '定位设备',
-  'menu.aris.vector': '矢量元素',
-  'menu.aris.voiceprint': '声纹',
-  'menu.aris.command': '指令设置',
-  'menu.aris.flight-plan': '航班计划',
-  'menu.aris.virtual-map': '虚拟地图',
-  'menu.aris.runway-invade': '跑道侵入',
-  'menu.aris.runway-occupy': '非航空器上道',
+  'menu.tg': 'TG',
+  'menu.tg.account': '账号管理',
+  'menu.tg.dialog': '对话管理',
   'menu.list': '列表页',
   'menu.result': '结果页',
   'menu.exception': '异常页',
@@ -78,4 +68,5 @@ export default {
   ...localeSystemRole,
   ...localeSystemUser,
   ...localeSystemMenu,
+  ...localeTG,
 };

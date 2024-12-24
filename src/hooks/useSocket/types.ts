@@ -5,8 +5,12 @@ export const enum ESocketRouter {
   systemNotify = 'system_notify',
   /** 站内消息通知 */
   notifyMessage = 'notify_message',
-  /** 位置更新 */
-  positionUpdate = 'position_update',
+  /** 账号登录更新 */
+  tgAccountLoginUpdate = 'tg_account_login_update',
+  /** 账号登录成功 */
+  tgAccountLoginSuccess = 'tg_account_login_success',
+  /** 账号登录失败 */
+  tgAccountLoginError = 'tg_account_login_error',
 }
 
 export type TListener = {
@@ -18,7 +22,9 @@ export type TListener = {
     title: string;
     content: string;
   }) => void;
-  [ESocketRouter.positionUpdate]: (res: any) => void;
+  [ESocketRouter.tgAccountLoginUpdate]: (res: any) => void;
+  [ESocketRouter.tgAccountLoginSuccess]: () => void;
+  [ESocketRouter.tgAccountLoginError]: () => void;
 };
 
 export type TEmitter = {
@@ -26,4 +32,8 @@ export type TEmitter = {
   join_im: (roomId: string | number) => void;
   /** 离开房间 */
   leave_im: (roomId: string | number) => void;
+  /** 登录验证 */
+  tg_account_login: (phone: string) => void;
+  /** 发送验证码 */
+  tg_account_send_code: (phone: string, code: string) => void;
 };

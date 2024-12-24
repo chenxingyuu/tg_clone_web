@@ -103,12 +103,6 @@
       setLoading(true);
       try {
         await userStore.login(values as LoginData);
-        const { redirect, ...othersQuery } = router.currentRoute.value.query;
-        const targetPath = redirect
-          ? (redirect as string)
-          : DEFAULT_ROUTE.fullPath;
-        await router.replace({ path: targetPath, query: { ...othersQuery } });
-        Message.success(t('login.form.login.success'));
 
         const { rememberPassword } = loginConfig.value;
         const { username, password } = values;
@@ -116,6 +110,13 @@
         // The actual production environment requires encrypted storage.
         loginConfig.value.username = rememberPassword ? username : '';
         loginConfig.value.password = rememberPassword ? password : '';
+
+        const { redirect, ...othersQuery } = router.currentRoute.value.query;
+        const targetPath = redirect
+          ? (redirect as string)
+          : DEFAULT_ROUTE.fullPath;
+        await router.replace({ path: targetPath, query: { ...othersQuery } });
+        Message.success(t('login.form.login.success'));
       } catch (err) {
         errorMessage.value = (err as Error).message;
       } finally {

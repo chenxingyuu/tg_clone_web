@@ -1,4 +1,4 @@
-import { LocationQueryRaw, Router } from 'vue-router';
+import { Router } from 'vue-router';
 import NProgress from 'nprogress'; // progress bar
 
 import { useUserStore } from '@/store';
