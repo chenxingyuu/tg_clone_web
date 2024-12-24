@@ -6,10 +6,6 @@ export async function getPermissionList(params: PermissionQueryParams) {
   return axios.get<PaginatedResponse<Permission>>('/permissions', { params });
 }
 
-export async function getPermissionDetail() {
-  return axios.get<Permission>('/permissions');
-}
-
 export async function createPermission(
   permission: Pick<Permission, 'name' | 'description'>
 ) {
@@ -21,13 +17,6 @@ export async function updatePermission(
   permission: Pick<Permission, 'name' | 'description'>
 ) {
   return axios.put(`/permissions/${id}`, permission);
-}
-
-export async function partialUpdatePermission(
-  id: number,
-  permission: Partial<Permission>
-) {
-  return axios.patch(`/permissions/${id}`, permission);
 }
 
 export async function deletePermission(id: number) {

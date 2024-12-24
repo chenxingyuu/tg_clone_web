@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PaginatedResponse } from '@/types/global';
-import { User, Permission, UserQueryParams, Role } from '@/api/system/types';
+import { User, UserQueryParams, Role } from '@/api/system/types';
 
 export function getUserList(params: UserQueryParams) {
   return axios.get<PaginatedResponse<User>>('/users', { params });
@@ -15,10 +15,6 @@ export async function updateUser(
   user: Pick<User, 'username' | 'email'>
 ) {
   return axios.put(`/users/${id}`, user);
-}
-
-export async function getUserPermissions(id: number) {
-  return axios.get<Permission[]>(`/users/${id}/permissions`);
 }
 
 export async function getUserRoles(id: number) {
