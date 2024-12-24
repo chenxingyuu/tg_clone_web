@@ -10,24 +10,18 @@
       >
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item
-              field="username"
-              :label="$t('system.user.form.username')"
-            >
+            <a-form-item field="username" :label="$t('system.user.username')">
               <a-input
                 v-model="localFormModel.username"
-                :placeholder="$t('system.user.form.username.placeholder')"
+                :placeholder="$t('system.user.username.placeholder')"
               />
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item
-              field="description"
-              :label="$t('system.user.form.description')"
-            >
+            <a-form-item field="email" :label="$t('system.user.email')">
               <a-input
-                v-model="localFormModel.description"
-                :placeholder="$t('system.user.form.description.placeholder')"
+                v-model="localFormModel.email"
+                :placeholder="$t('system.user.email.placeholder')"
               />
             </a-form-item>
           </a-col>
@@ -66,27 +60,33 @@
 
 <script setup lang="ts">
   import { defineEmits, ref, watch } from 'vue';
+  import { UserQueryParams } from '@/api/system/types';
 
-  const localFormModel = ref({
-    username: '',
-    description: '',
-  });
+  const props = defineProps<{ modelValue: UserQueryParams }>();
+  // 初始化本地表单模型
+  const localFormModel = ref<UserQueryParams>({ ...props.modelValue });
+  const emit = defineEmits(['search', 'create', 'update:model-value']);
 
-  const emit = defineEmits(['reset', 'search', 'create', 'changed']);
-
+  // 监听 localFormModel 的变化，自动同步到父组件
   watch(
-    () => localFormModel,
-    (newValue) => {
-      emit('changed', newValue.value);
+    localFormModel,
+    (newVal) => {
+      emit('update:model-value', newVal);
     },
     { deep: true }
   );
+
   const onReset = () => {
-    emit('reset');
+    Object.assign(localFormModel.value, {
+      username: undefined,
+      email: undefined,
+    });
+
+    emit('search');
   };
 
   const onSearch = () => {
-    emit('search', localFormModel.value);
+    emit('search');
   };
 
   const onCreate = () => {

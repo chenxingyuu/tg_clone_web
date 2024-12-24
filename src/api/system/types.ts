@@ -65,9 +65,14 @@ export interface MenuQueryParams extends PaginationParams {
 export interface User {
   id: number;
   username: string;
+  email: string;
 }
 
-export interface UserQueryParams extends PaginationParams {
+export interface UserQueryParams {
   username?: string;
-  description?: string;
+  email?: string;
 }
+
+export interface UserQueryPaginationParams
+  extends UserQueryParams,
+    PaginationParams {}

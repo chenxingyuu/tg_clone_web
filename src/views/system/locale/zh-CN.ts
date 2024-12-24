@@ -1,0 +1,17 @@
+export default {
+  'system.user.title': '用户管理',
+  'system.user.id': 'ID',
+  'system.user.username': '用户名称',
+  'system.user.username.placeholder': '请输入用户名称',
+  'system.user.email': '邮箱',
+  'system.user.email.placeholder': '请输入邮箱',
+  'system.user.roles': '用户角色',
+  'system.user.createdAt': '创建时间',
+  'system.user.operations': '操作',
+  'system.user.operations.view': '查看',
+  'system.user.operations.edit': '编辑',
+  'system.user.operations.create': '新建',
+  'system.user.operations.view.title': '用户详情',
+  'system.user.operations.edit.title': '编辑用户',
+  'system.user.operations.create.title': '新增用户',
+};

@@ -20,7 +20,7 @@ import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 import localeSystemPermission from '@/views/system/permission/locale/zh-CN';
 import localeSystemMenu from '@/views/system/menu/locale/zh-CN';
 import localeSystemRole from '@/views/system/role/locale/zh-CN';
-import localeSystemUser from '@/views/system/user/locale/zh-CN';
+import localeSystem from '@/views/system/locale/zh-CN';
 import localeTG from '@/views/tg/locale/zh-CN';
 import localeSettings from './zh-CN/settings';
 
@@ -64,9 +64,9 @@ export default {
   ...locale500,
   ...localeUserInfo,
   ...localeUserSetting,
+  ...localeSystem,
   ...localeSystemPermission,
   ...localeSystemRole,
-  ...localeSystemUser,
   ...localeSystemMenu,
   ...localeTG,
 };
