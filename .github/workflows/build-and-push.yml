@@ -18,11 +18,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Build project
-        run: npm run build
+        run: pnpm run build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -31,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t your-docker-repo/your-image-name:your-tag .
+        run: docker build -t xingyulll/tg_clone_web:1.0.0 .
 
       - name: Push Docker image
-        run: docker push your-docker-repo/your-image-name:your-tag
+        run: docker push xingyulll/tg_clone_web:1.0.0
