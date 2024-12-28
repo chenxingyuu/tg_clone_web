@@ -47,7 +47,6 @@ export interface DialogQueryParams {
   title?: string;
   username?: string;
   account_id?: number;
-  status?: number;
 }
 export interface DialogQueryPaginationParams
   extends DialogQueryParams,

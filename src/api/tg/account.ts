@@ -5,6 +5,11 @@ import { PaginatedResponse } from '@/types/global';
 export function getAccountList(params: AccountQueryPaginationParams) {
   return axios.get<PaginatedResponse<Account>>('/accounts', { params });
 }
+
+export function getAccountListAll() {
+  return axios.get<Account[]>('/accounts/all');
+}
+
 export async function createAccount(
   account: Pick<Account, 'name' | 'phone' | 'password' | 'api_id' | 'api_hash'>
 ) {

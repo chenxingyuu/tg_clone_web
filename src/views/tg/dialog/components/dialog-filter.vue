@@ -27,18 +27,20 @@
           </a-col>
           <a-col :span="8">
             <a-form-item field="account_id" :label="$t('tg.dialog.account_id')">
-              <a-input-number
+              <a-select
                 v-model="localFormModel.account_id"
                 :placeholder="$t('tg.dialog.account_id.placeholder')"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="8">
-            <a-form-item field="status" :label="$t('tg.dialog.status')">
-              <a-input-number
-                v-model="localFormModel.status"
-                :placeholder="$t('tg.dialog.status.placeholder')"
-              />
+                allow-clear
+                @clear="localFormModel.account_id = undefined"
+              >
+                <a-option
+                  v-for="option in accountIDOptions"
+                  :key="option.value"
+                  :value="option.value"
+                >
+                  {{ option.label }}
+                </a-option>
+              </a-select>
             </a-form-item>
           </a-col>
         </a-row>
@@ -65,12 +67,15 @@
 </template>
 
 <script setup lang="ts">
-  import { defineEmits, ref, watch } from 'vue';
+  import { defineEmits, onMounted, ref, watch } from 'vue';
   import { DialogQueryParams } from '@/api/tg/types';
+  import { getAccountListAll } from '@/api/tg/account';
 
   const props = defineProps<{ modelValue: DialogQueryParams }>();
   // 初始化本地表单模型
-  const localFormModel = ref<DialogQueryParams>({ ...props.modelValue });
+  const localFormModel = ref<DialogQueryParams>({
+    ...props.modelValue,
+  });
 
   const emit = defineEmits(['search', 'update:model-value']);
 
@@ -83,12 +88,20 @@
     { deep: true }
   );
 
+  const accountIDOptions = ref<{ value: string; label: string }[]>([]);
+  // 初始化 accountIDOptions
+  onMounted(async () => {
+    const response = await getAccountListAll();
+    accountIDOptions.value = response.data.map((item: any) => ({
+      value: item.id,
+      label: item.name,
+    }));
+  });
   const onReset = () => {
     Object.assign(localFormModel.value, {
       username: undefined,
       title: undefined,
       account_id: undefined,
-      status: undefined,
     });
 
     emit('search');

@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
   import { formatDate } from '@/utils/date';
-  import { ref, computed, reactive } from 'vue';
+  import { ref, computed, reactive, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import useLoading from '@/hooks/loading';
@@ -85,6 +85,7 @@
   const filterFormModel = ref<DialogQueryParams>({
     title: undefined,
     username: undefined,
+    account_id: undefined,
   });
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
@@ -109,6 +110,11 @@
       dataIndex: 'username',
     },
     {
+      title: t('tg.dialog.tg_id'),
+      dataIndex: 'tg_id',
+      width: 150,
+    },
+    {
       title: t('tg.dialog.type'),
       dataIndex: 'type',
       slotName: 'type',
@@ -117,7 +123,7 @@
       title: t('tg.dialog.createdAt'),
       dataIndex: 'created_at',
       slotName: 'created_at',
-      width: 200,
+      width: 180,
     },
     {
       title: t('tg.dialog.operations'),
@@ -152,10 +158,8 @@
     }
   };
 
-  fetchData();
-
-  const search = () => {
-    fetchData({
+  const search = async () => {
+    await fetchData({
       ...basePagination,
       ...filterFormModel.value,
     } as unknown as DialogQueryPaginationParams);
@@ -194,6 +198,10 @@
   const updateFilterModel = (newVal: any) => {
     filterFormModel.value = newVal;
   };
+
+  onMounted(async () => {
+    await search();
+  });
 </script>
 
 <style scoped lang="less">
