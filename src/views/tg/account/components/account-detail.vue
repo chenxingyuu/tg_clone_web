@@ -276,11 +276,11 @@
     list?.scrollTo(0, list.scrollHeight);
   };
   onAndAutoOff({
-    [ESocketRouter.tgAccountLoginUpdate]: (res: string) => {
+    [ESocketRouter.tgAccountLoginUpdate]: (msg: string) => {
       verificationFormReadonly.value = true;
       verificationFormError.value = false;
       // 接收登录状态更新，进行显示
-      loginMessageList.value = [...loginMessageList.value, res];
+      loginMessageList.value = [...loginMessageList.value, msg];
       scrollToBottom();
     },
     [ESocketRouter.tgAccountLoginError]: () => {

@@ -11,6 +11,8 @@ export const enum ESocketRouter {
   tgAccountLoginSuccess = 'tg_account_login_success',
   /** 账号登录失败 */
   tgAccountLoginError = 'tg_account_login_error',
+  /** 账号信息同步更新 */
+  tgAccountDialogInfoSyncUpdate = 'tg_account_dialog_info_sync_update',
 }
 
 export type TListener = {
@@ -22,9 +24,10 @@ export type TListener = {
     title: string;
     content: string;
   }) => void;
-  [ESocketRouter.tgAccountLoginUpdate]: (res: any) => void;
+  [ESocketRouter.tgAccountLoginUpdate]: (msg: string) => void;
   [ESocketRouter.tgAccountLoginSuccess]: () => void;
   [ESocketRouter.tgAccountLoginError]: () => void;
+  [ESocketRouter.tgAccountDialogInfoSyncUpdate]: (msg: string) => void;
 };
 
 export type TEmitter = {
@@ -36,4 +39,6 @@ export type TEmitter = {
   tg_account_login: (phone: string) => void;
   /** 发送验证码 */
   tg_account_send_code: (phone: string, code: string) => void;
+  /** 同步账号信息 */
+  tg_account_dialog_info_sync: (phone: string) => void;
 };

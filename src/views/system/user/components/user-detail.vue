@@ -111,6 +111,7 @@
     // 这里的 newTargetKeys 是用户当前选中的项的 key 列表
     // 你可以在这里添加其他逻辑，例如保存选中的权限到服务器
   };
+
   watch(
     () => props.visible,
     (visible) => {

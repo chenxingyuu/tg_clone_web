@@ -1,5 +1,6 @@
 export default {
   'tg.account.card_title': '账号管理',
+
   'tg.account.id': 'ID',
   'tg.account.name': '名称',
   'tg.account.status': '状态',
@@ -30,4 +31,24 @@ export default {
   'tg.account.view.title': '账号详情',
   'tg.account.edit.title': '编辑账号',
   'tg.account.create.title': '新增账号',
+
+  'tg.dialog.card_title': '对话管理',
+  'tg.dialog.id': 'ID',
+  'tg.dialog.title': '标题',
+  'tg.dialog.username': '用户名',
+  'tg.dialog.type': '类型',
+  'tg.dialog.status': '状态',
+  'tg.dialog.tg_id': 'TG ID',
+  'tg.dialog.account_id': '账号 ID',
+  'tg.dialog.createdAt': '创建时间',
+
+  'tg.dialog.username.placeholder': '请输入用户名',
+  'tg.dialog.title.placeholder': '请输入标题',
+  'tg.dialog.account_id.placeholder': '请选择账号',
+  'tg.dialog.status.placeholder': '请选择状态',
+
+  'tg.dialog.operations': '操作',
+  'tg.dialog.operations.edit': '编辑',
+  'tg.dialog.operations.view': '查看',
+  'tg.dialog.view.title': '对话详情',
 };
