@@ -10,8 +10,10 @@ export default {
   'tg.account.api_hash': 'API Hash',
   'tg.account.first_name': 'First Name',
   'tg.account.last_name': 'Last Name',
+  'tg.account.dialog_count': '对话数量',
   'tg.account.tg_id': 'TG ID',
   'tg.account.createdAt': '创建时间',
+  'tg.account.updatedAt': '更新时间',
 
   'tg.account.name.placeholder': '请输入账号名称',
   'tg.account.phone.placeholder': '请输入手机号',
@@ -28,9 +30,13 @@ export default {
 
   'tg.account.operations': '操作',
   'tg.account.operations.edit': '编辑',
+  'tg.account.operations.active': '激活',
+  'tg.account.operations.update_dialog': '同步',
+  'tg.account.operations.update_dialog.tooltip': '同步对话信息',
   'tg.account.view.title': '账号详情',
   'tg.account.edit.title': '编辑账号',
   'tg.account.create.title': '新增账号',
+  'tg.account.active.title': '激活 TG 账号',
 
   'tg.dialog.card_title': '对话管理',
   'tg.dialog.id': 'ID',

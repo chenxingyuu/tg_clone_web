@@ -29,6 +29,9 @@
           <template #created_at="{ record }">
             {{ formatDate(record.created_at) }}
           </template>
+          <template #updated_at="{ record }">
+            {{ formatDate(record.updated_at) }}
+          </template>
           <template #operations="{ record }">
             <a-button
               type="text"
@@ -37,6 +40,29 @@
               @click="() => openDrawer('edit', record)"
             >
               {{ $t('tg.account.operations.edit') }}
+            </a-button>
+            <a-tooltip
+              v-if="record.status === AccountStatus.NORMAL"
+              :content="$t('tg.account.operations.update_dialog.tooltip')"
+            >
+              <a-button
+                type="text"
+                size="small"
+                style="margin-left: 8px"
+                @click="() => handleDialogInfoSync(record.phone)"
+              >
+                {{ $t('tg.account.operations.update_dialog') }}
+              </a-button>
+            </a-tooltip>
+
+            <a-button
+              v-if="record.status === AccountStatus.EXPIRED"
+              type="text"
+              size="small"
+              style="margin-left: 8px"
+              @click="() => openActiveModal(record)"
+            >
+              {{ $t('tg.account.operations.active') }}
             </a-button>
           </template>
         </a-table>
@@ -51,6 +77,12 @@
           @fetch="fetchData"
         />
       </a-card>
+      <account-active
+        :visible="activeVisible"
+        :phone="selectedAccount.phone"
+        :title="$t('tg.account.operations.active')"
+        @update:visible="(val) => (activeVisible = val)"
+      ></account-active>
     </div>
   </div>
 </template>
@@ -76,10 +108,16 @@
   } from '@/api/tg/account';
   import AccountFilter from '@/views/tg/account/components/account-filter.vue';
   import AccountDetail from '@/views/tg/account/components/account-detail.vue';
+  import AccountActive from '@/views/tg/account/components/account-active.vue';
+  import useSocket from '@/hooks/useSocket';
+  import { ESocketRouter } from '@/hooks/useSocket/types';
+  import { Message } from '@arco-design/web-vue';
 
   const drawerVisible = ref(false);
   const drawerTitle = ref('');
   const drawerMode = ref<'add' | 'edit' | 'detail'>('add');
+
+  const activeVisible = ref(false);
 
   const selectedAccount = ref<Account>({
     id: 0,
@@ -129,6 +167,10 @@
       dataIndex: 'last_name',
     },
     {
+      title: t('tg.account.dialog_count'),
+      dataIndex: 'dialog_count',
+    },
+    {
       title: t('tg.account.status'),
       dataIndex: 'status',
       slotName: 'status',
@@ -141,11 +183,17 @@
       width: 200,
     },
     {
+      title: t('tg.account.updatedAt'),
+      dataIndex: 'updated_at',
+      slotName: 'updated_at',
+      width: 200,
+    },
+    {
       title: t('tg.account.operations'),
       dataIndex: 'operations',
       slotName: 'operations',
       align: 'center',
-      width: 100,
+      width: 200,
     },
   ]);
 
@@ -251,9 +299,32 @@
     };
     drawerVisible.value = true;
   };
+  const { emit: socketEmit, onAndAutoOff } = useSocket();
+
+  const handleDialogInfoSync = (phone: string) => {
+    socketEmit('tg_account_dialog_info_sync', phone);
+  };
   const updateFilterModel = (newVal: any) => {
     filterFormModel.value = newVal;
   };
+
+  const openActiveModal = (account: Account) => {
+    selectedAccount.value = account;
+    activeVisible.value = true;
+  };
+
+  onAndAutoOff({
+    [ESocketRouter.tgAccountDialogInfoSyncUpdate]: (msg: string) => {
+      // eslint-disable-next-line no-console
+      console.log(msg);
+    },
+    [ESocketRouter.tgAccountDialogInfoSyncError]: () => {
+      Message.error('同步失败');
+    },
+    [ESocketRouter.tgAccountDialogInfoSyncSuccess]: () => {
+      Message.success('同步成功');
+    },
+  });
 </script>
 
 <style scoped lang="less">

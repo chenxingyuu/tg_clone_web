@@ -13,6 +13,10 @@ export const enum ESocketRouter {
   tgAccountLoginError = 'tg_account_login_error',
   /** 账号信息同步更新 */
   tgAccountDialogInfoSyncUpdate = 'tg_account_dialog_info_sync_update',
+  /** 账号信息同步成功 */
+  tgAccountDialogInfoSyncSuccess = 'tg_account_dialog_info_sync_success',
+  /** 账号信息同步失败 */
+  tgAccountDialogInfoSyncError = 'tg_account_dialog_info_sync_error',
 }
 
 export type TListener = {
@@ -28,6 +32,8 @@ export type TListener = {
   [ESocketRouter.tgAccountLoginSuccess]: () => void;
   [ESocketRouter.tgAccountLoginError]: () => void;
   [ESocketRouter.tgAccountDialogInfoSyncUpdate]: (msg: string) => void;
+  [ESocketRouter.tgAccountDialogInfoSyncSuccess]: () => void;
+  [ESocketRouter.tgAccountDialogInfoSyncError]: () => void;
 };
 
 export type TEmitter = {
