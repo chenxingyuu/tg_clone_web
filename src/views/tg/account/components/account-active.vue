@@ -101,7 +101,7 @@
     :title="title"
     :visible="visible"
     :unmount-on-close="true"
-    :footer="null"
+    :footer="false"
     @cancel="handleClose"
   >
     <a-form :model="verificationForm">
